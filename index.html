@@ -1,208 +1,271 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>WILLZ STORE | Joki Fish It</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+    /* font import optional */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+    :root{
+      --bg1:#071426;
+      --bg2:#0f3747;
+      --accent:#39d6ff;
+      --accent-2:#7ee8fa;
+      --card: rgba(255,255,255,0.03);
+      --glass: rgba(255,255,255,0.04);
     }
-    body {
-      background: linear-gradient(180deg, #00111a, #00334d, #004466);
-      color: #fff;
-      min-height: 100vh;
-    }
-    header {
-      background: rgba(0,0,0,0.7);
-      padding: 15px 25px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    header h1 {
-      font-size: 20px;
-      color: #00eaff;
-      font-weight: 600;
-    }
-    nav button {
-      background: #00eaff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-    nav button:hover {
-      background: #00bcd4;
-    }
-    main {
-      padding: 25px;
-      max-width: 800px;
-      margin: auto;
-    }
-    section {
-      display: none;
-      animation: fadeIn 0.5s ease-in-out;
-    }
-    section.active {
-      display: block;
-    }
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(10px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-    h2 {
-      margin-bottom: 15px;
-      color: #00eaff;
-    }
-    .card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      transition: 0.3s;
-    }
-    .card:hover {
-      transform: scale(1.02);
-      border-color: #00eaff;
-    }
-    .packages button {
-      display: block;
-      width: 100%;
-      margin-top: 10px;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      background: #00eaff;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .packages button:hover {
-      background: #00bcd4;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      outline: none;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 13px;
-      opacity: 0.8;
-    }
-    ul { margin-left: 20px; }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:"Poppins",system-ui,Arial;color:#eef6fb;background:linear-gradient(180deg,var(--bg1),var(--bg2));-webkit-font-smoothing:antialiased}
+    header{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.2));border-bottom:1px solid rgba(255,255,255,0.03)}
+    .brand .title{font-weight:800;color:var(--accent);letter-spacing:1px}
+    nav{display:flex;gap:8px}
+    nav button{background:transparent;border:1px solid rgba(255,255,255,0.06);color:inherit;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600;transition:all .15s}
+    nav button.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#002a33;border-color:transparent}
+    nav button:hover{transform:translateY(-3px)}
+
+    .wrap{max-width:980px;margin:20px auto;padding:0 16px}
+    .grid{display:grid;grid-template-columns:1fr 420px;gap:18px}
+    @media(max-width:920px){.grid{grid-template-columns:1fr}}
+
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(0,0,0,0.45)}
+    .panel h2{margin:0 0 8px;color:var(--accent)}
+    .muted{color:rgba(255,255,255,0.78);font-size:14px}
+
+    .benefit{display:flex;gap:12px;align-items:flex-start;padding:10px;border-radius:10px;background:var(--card);border:1px solid rgba(255,255,255,0.01)}
+    .ico{width:44px;height:44;border-radius:10px;display:grid;place-items:center;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#002a33;font-weight:800}
+    .noted{margin-top:10px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.03)}
+    .noted li{margin:6px 0;color:#fff9e6}
+
+    /* order side */
+    .order-side .small{font-size:13px;color:rgba(255,255,255,0.78);margin-bottom:8px}
+    .input{width:100%;padding:10px;border-radius:10px;border:none;background:rgba(255,255,255,0.02);color:inherit}
+    .pkg-group{display:grid;gap:10px;margin-top:10px}
+    .pkg{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);cursor:pointer;transition:transform .12s,box-shadow .12s}
+    .pkg:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
+    .pkg .title{font-weight:700;color:#bffcff}
+    .pkg .price{color:#ffeaa7;font-weight:800}
+    .btn-ghost{padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit;cursor:pointer}
+    .btn-primary{padding:10px 12px;border-radius:8px;border:none;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#002a33;font-weight:800;cursor:pointer}
+
+    /* modal */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:80}
+    .overlay.open{display:flex}
+    .modal{width:92%;max-width:420px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    .struk{background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;margin-top:8px}
+
+    /* toast */
+    .toast{position:fixed;left:50%;transform:translateX(-50%);top:18px;background:rgba(0,0,0,0.7);padding:10px 14px;border-radius:12px;display:none;z-index:90;color:#fff}
+    .toast.show{display:block;animation:toastIn .35s both}
+    @keyframes toastIn{from{opacity:0;transform:translate(-50%,-6px)}to{opacity:1;transform:translate(-50%,0)}}
+
+    footer{text-align:center;padding:16px;color:rgba(255,255,255,0.6);font-size:13px;margin-top:22px}
   </style>
 </head>
 <body>
   <header>
-    <h1>WILLZ STORE</h1>
+    <div class="brand">
+      <div class="title">WILLZ STORE</div>
+      <div class="muted">Joki Roblox • Fish It • Aman & Terpercaya</div>
+    </div>
+
     <nav>
-      <button onclick="showSection('home')">Home</button>
-      <button onclick="showSection('fishit')">Fish It</button>
+      <button id="btnHome" class="active">Home</button>
+      <button id="btnFish">Fish It</button>
     </nav>
   </header>
 
-  <main>
-    <!-- HOME -->
-    <section id="home" class="active">
-      <div class="card">
-        <h2>Tentang Kami</h2>
-        <p>WILLZ STORE adalah jasa joki Roblox Fish It yang aman, terpercaya, dan cepat. Kepercayaan Anda adalah prioritas kami 🚀</p>
-      </div>
-      <div class="card">
-        <h2>Keuntungan</h2>
-        <ul>
-          <li>Bebas request pulau</li>
-          <li>Tas anti buka</li>
-          <li>Ikan 100% buat kamu</li>
-          <li>Akun aman 100%</li>
-          <li>Anti ban</li>
-          <li>Menggunakan auto click</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2>Testimoni</h2>
-        <p>⭐ “Joki cepat, aman, dan terpercaya!”</p>
-        <p>⭐ “Terbaik pokoknya, mantap Bang Willz!”</p>
-      </div>
-    </section>
+  <div class="wrap">
+    <div class="grid">
+      <!-- HOME panel -->
+      <div id="homePanel" class="panel">
+        <h2>Tentang WILLZ STORE</h2>
+        <div class="muted">Kami menyediakan jasa joki Fish It terpercaya — aman, cepat, dan hemat.</div>
 
-    <!-- FISH IT -->
-    <section id="fishit">
-      <div class="card">
+        <h2 style="margin-top:12px">Keuntungan Beli di WILLZ STORE</h2>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px">
+          <div class="benefit"><div class="ico">🎯</div><div class="txt"><b>Bebas request pulau</b><div class="muted">Request pulau tanpa biaya tambahan.</div></div></div>
+          <div class="benefit"><div class="ico">🎒</div><div class="txt"><b>Tas anti buka</b><div class="muted">Aman selama proses.</div></div></div>
+          <div class="benefit"><div class="ico">🐟</div><div class="txt"><b>Ikan 100% buat kamu</b><div class="muted">Hasil AFK milikmu sepenuhnya.</div></div></div>
+          <div class="benefit"><div class="ico">🔐</div><div class="txt"><b>Akun aman 100%</b><div class="muted">Kami menjaga keamanan akun.</div></div></div>
+          <div class="benefit"><div class="ico">🚫</div><div class="txt"><b>Anti ban</b><div class="muted">Metode minim risiko deteksi.</div></div></div>
+          <div class="benefit"><div class="ico">⚡</div><div class="txt"><b>Menggunakan auto click</b><div class="muted">Akselerasi proses untuk hasil cepat.</div></div></div>
+        </div>
+
+        <h2 style="margin-top:14px">Noted (Catatan Penting)</h2>
+        <div class="noted">
+          <ul>
+            <li>Selama proses AFK, jangan diganggu/di-attack. Jika terjadi 2x penabrakan/hang, proses dapat dianggap hangus.</li>
+            <li>Pastikan nama/username yang diberikan benar sebelum konfirmasi.</li>
+            <li>Untuk item langka atau enchant, konfirmasi terlebih dahulu sebelum melakukan pembayaran.</li>
+            <li>Komplain/Refund dilayani dengan bukti yang jelas.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FISH panel -->
+      <div id="fishPanel" class="panel" style="display:none">
         <h2>Order — Fish It</h2>
-        <p>Masukkan nama Anda lalu pilih paket:</p>
-        <input type="text" id="nama" placeholder="Contoh: Budi / Andi">
+        <div class="small">Masukkan nama (bisa nama biasa) lalu pilih paket.</div>
+        <div style="margin-top:10px">
+          <input id="nameInput" class="input" placeholder="Masukkan nama (contoh: Budi / Andi)">
+        </div>
+
+        <!-- AFK -->
+        <div style="margin-top:12px">
+          <h3 style="margin:0 0 8px 0;color:var(--accent)">AFK Joki</h3>
+          <div class="pkg-group" id="afkList">
+            <div class="pkg" data-pkg="AFK Joki - 6 Jam" data-price="6K"><div class="title">6 Jam</div><div class="price">6K</div></div>
+            <div class="pkg" data-pkg="AFK Joki - 12 Jam" data-price="10K"><div class="title">12 Jam</div><div class="price">10K</div></div>
+            <div class="pkg" data-pkg="AFK Joki - 1 Hari" data-price="15K"><div class="title">1 Hari</div><div class="price">15K</div></div>
+            <div class="pkg" data-pkg="AFK Joki - 3 Hari" data-price="35K"><div class="title">3 Hari</div><div class="price">35K</div></div>
+            <div class="pkg" data-pkg="AFK Joki - 1 Minggu" data-price="65K"><div class="title">1 Minggu</div><div class="price">65K</div></div>
+          </div>
+        </div>
+
+        <!-- Koin -->
+        <div style="margin-top:12px">
+          <h3 style="margin:8px 0;color:var(--accent)">Jasa Joki Koin</h3>
+          <div class="pkg-group" id="coinList">
+            <div class="pkg" data-pkg="Joki Koin - 1M" data-price="15K"><div class="title">1M</div><div class="price">15K</div></div>
+            <div class="pkg" data-pkg="Joki Koin - 3M" data-price="25K"><div class="title">3M</div><div class="price">25K</div></div>
+            <div class="pkg" data-pkg="Joki Koin - 8M" data-price="50K"><div class="title">8M</div><div class="price">50K</div></div>
+            <div class="pkg" data-pkg="Joki Koin - 10M" data-price="70K"><div class="title">10M</div><div class="price">70K</div></div>
+            <div class="pkg" data-pkg="Joki Koin - 15M" data-price="90K"><div class="title">15M</div><div class="price">90K</div></div>
+          </div>
+        </div>
+
+        <!-- Rod -->
+        <div style="margin-top:12px">
+          <h3 style="margin:8px 0;color:var(--accent)">Rod Joki</h3>
+          <div class="pkg-group" id="rodList">
+            <div class="pkg" data-pkg="Rod Joki - Astral Rod" data-price="15K"><div class="title">Astral Rod</div><div class="price">15K</div></div>
+            <div class="pkg" data-pkg="Rod Joki - Ares Rod" data-price="35K"><div class="title">Ares Rod</div><div class="price">35K</div></div>
+            <div class="pkg" data-pkg="Rod Joki - Angler Rod" data-price="70K"><div class="title">Angler Rod</div><div class="price">70K</div></div>
+            <div class="pkg" data-pkg="Rod Joki - GhostFinn Rod" data-price="100K"><div class="title">GhostFinn Rod</div><div class="price">100K</div></div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px" class="muted">Nomor tujuan: <b>+62 857-8068-8201</b></div>
       </div>
+    </div>
+  </div>
 
-      <div class="card packages">
-        <h2>AFK Joki</h2>
-        <button onclick="pesan('AFK Joki - 6 Jam','6K')">6 Jam — 6K</button>
-        <button onclick="pesan('AFK Joki - 12 Jam','10K')">12 Jam — 10K</button>
-        <button onclick="pesan('AFK Joki - 1 Hari','15K')">1 Hari — 15K</button>
-        <button onclick="pesan('AFK Joki - 3 Hari','35K')">3 Hari — 35K</button>
-        <button onclick="pesan('AFK Joki - 1 Minggu','65K')">1 Minggu — 65K</button>
+  <!-- modal & toast -->
+  <div id="overlay" class="overlay" aria-hidden="true">
+    <div class="modal" role="dialog">
+      <h3 style="margin:0;color:var(--accent)">Konfirmasi Order</h3>
+      <div class="muted" style="font-size:13px;margin-top:6px">Periksa kembali sebelum dikirim ke WhatsApp.</div>
+      <div class="struk" id="struk"></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+        <button id="btnCancel" class="btn-ghost">Batal</button>
+        <button id="btnSend" class="btn-primary">Kirim ke WhatsApp</button>
       </div>
+    </div>
+  </div>
 
-      <div class="card packages">
-        <h2>Jasa Joki Koin</h2>
-        <button onclick="pesan('Joki Koin - 1M','15K')">1M — 15K</button>
-        <button onclick="pesan('Joki Koin - 3M','25K')">3M — 25K</button>
-        <button onclick="pesan('Joki Koin - 8M','50K')">8M — 50K</button>
-        <button onclick="pesan('Joki Koin - 10M','70K')">10M — 70K</button>
-        <button onclick="pesan('Joki Koin - 15M','90K')">15M — 90K</button>
-      </div>
+  <div id="toast" class="toast">Mengarahkan ke WhatsApp...</div>
 
-      <div class="card packages">
-        <h2>Rod Joki</h2>
-        <button onclick="pesan('Rod Joki - Astral Rod','15K')">Astral Rod — 15K</button>
-        <button onclick="pesan('Rod Joki - Ares Rod','35K')">Ares Rod — 35K</button>
-        <button onclick="pesan('Rod Joki - Angler Rod','70K')">Angler Rod — 70K</button>
-        <button onclick="pesan('Rod Joki - GhostFinn Rod','100K')">GhostFinn Rod — 100K</button>
-      </div>
+  <footer>© WILLZ STORE — Joki Fish It. Gunakan layanan sesuai aturan game.</footer>
 
-      <div class="card">
-        <h2>Noted ⚠️</h2>
-        <p>Selama proses AFK jangan diotak-atik. Jika diotak-atik 2x, pesanan dianggap hangus ❌</p>
-      </div>
-    </section>
-  </main>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  try {
+    const btnHome = document.getElementById('btnHome');
+    const btnFish = document.getElementById('btnFish');
+    const homePanel = document.getElementById('homePanel');
+    const fishPanel = document.getElementById('fishPanel');
+    const nameInput = document.getElementById('nameInput');
+    const overlay = document.getElementById('overlay');
+    const strukEl = document.getElementById('struk');
+    const btnSend = document.getElementById('btnSend');
+    const btnCancel = document.getElementById('btnCancel');
+    const toast = document.getElementById('toast');
+    const WA_NUMBER = '6285780688201';
 
-  <footer>
-    © 2025 WILLZ STORE • Joki Fish It Aman & Terpercaya
-  </footer>
+    // panel toggles
+    btnHome.addEventListener('click', ()=>{ btnHome.classList.add('active'); btnFish.classList.remove('active'); homePanel.style.display='block'; fishPanel.style.display='none'; window.scrollTo({top:0,behavior:'smooth'}); });
+    btnFish.addEventListener('click', ()=>{ btnFish.classList.add('active'); btnHome.classList.remove('active'); homePanel.style.display='none'; fishPanel.style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); });
 
-  <script>
-    function showSection(id) {
-      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+    // package click handlers (delegation)
+    const allPkgLists = document.querySelectorAll('.pkg-group');
+    let selected = null;
+    allPkgLists.forEach(list => {
+      list.addEventListener('click', (ev) => {
+        const pkgEl = ev.target.closest('.pkg');
+        if(!pkgEl) return;
+        const name = (nameInput.value || '').trim() || 'Tanpa Nama';
+        const pkg = pkgEl.dataset.pkg || pkgEl.querySelector('.title')?.innerText || 'Paket';
+        const price = pkgEl.dataset.price || pkgEl.querySelector('.price')?.innerText || '';
+        selected = { pkg, price, name };
+        // show modal
+        strukEl.innerHTML = `
+          <div class="struk">
+            <div style="font-weight:800;color:#bffcff">WILLZ STORE — STRUK ORDER</div>
+            <div style="margin-top:8px;font-size:14px;color:rgba(255,255,255,0.95)">
+              <div>Halo Bang Willz 👋</div>
+              <div style="margin-top:8px"><b>Paket:</b> ${escapeHtml(selected.pkg)}</div>
+              <div><b>Harga:</b> ${escapeHtml(selected.price)}</div>
+              <div><b>Nama:</b> ${escapeHtml(selected.name)}</div>
+            </div>
+          </div>`;
+        overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false');
+      });
+    });
+
+    btnCancel.addEventListener('click', ()=>{ overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); });
+
+    btnSend.addEventListener('click', ()=> {
+      if(!selected) return;
+      // Build message and encode
+      const msgLines = [
+        "Halo Bang Willz 👋",
+        "",
+        "Saya mau order:",
+        `- Paket: ${selected.pkg}`,
+        `- Harga: ${selected.price}`,
+        `- Nama: ${selected.name}`,
+        "",
+        "Terima kasih 🙏"
+      ];
+      const message = msgLines.join('\n');
+      const encoded = encodeURIComponent(message);
+      const url = `https://wa.me/${WA_NUMBER}?text=${encoded}`;
+
+      // show toast and open
+      showToast("Mengarahkan ke WhatsApp...");
+      // small delay so toast visible
+      setTimeout(()=> {
+        try { window.open(url, '_blank'); }
+        catch(e){ window.location.href = url; }
+        overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true');
+      }, 600);
+    });
+
+    // overlay click to close
+    overlay.addEventListener('click', (e)=>{ if(e.target === overlay){ overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); } });
+
+    function showToast(msg){
+      toast.textContent = msg || 'Mengarahkan ke WhatsApp...';
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'),2200);
     }
 
-    function pesan(paket, harga) {
-      const nama = document.getElementById("nama").value.trim() || "Tanpa Nama";
-      const pesanWA = `Halo Bang Willz 👋%0A` +
-                      `Saya mau order:%0A` +
-                      `Paket: ${paket}%0A` +
-                      `Harga: ${harga}%0A` +
-                      `Nama: ${nama}`;
-      const noWA = "6285780688201";
-      window.open(`https://wa.me/${noWA}?text=${pesanWA}`, "_blank");
+    // simple escape
+    function escapeHtml(str){
+      return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
     }
-  </script>
+
+    // initial state
+    homePanel.style.display='block';
+    fishPanel.style.display='none';
+  } catch(err){
+    console.error('Error init WILLZ STORE UI:', err);
+    // don't break UI for user
+  }
+});
+</script>
 </body>
-</html>
+        </html>i
