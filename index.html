@@ -1,378 +1,208 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WILLZ STORE | Joki Fish It</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:'Poppins',system-ui,Arial;
-      background:linear-gradient(135deg,#071426 0%, #0f3747 50%, #072b41 100%);
-      color:#eef6fb;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
-
-    /* HEADER */
-    header{
-      position:sticky;
-      top:0;
-      z-index:40;
-      backdrop-filter:blur(6px);
-      background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.25));
-      border-bottom:1px solid rgba(255,255,255,0.03);
-      padding:14px 20px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
+    body {
+      background: linear-gradient(180deg, #00111a, #00334d, #004466);
+      color: #fff;
+      min-height: 100vh;
     }
-    .brand{
-      display:flex;flex-direction:column;
+    header {
+      background: rgba(0,0,0,0.7);
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    .brand .title{
-      font-weight:800;color:#39d6ff;letter-spacing:2px;font-size:20px;
-      text-shadow:0 6px 18px rgba(0,0,0,0.6);
+    header h1 {
+      font-size: 20px;
+      color: #00eaff;
+      font-weight: 600;
     }
-    .brand .subtitle{font-size:12px;color:rgba(255,255,255,0.65)}
-
-    nav{display:flex;gap:10px;align-items:center}
-    nav button{
-      background:transparent;border:1px solid rgba(255,255,255,0.06);
-      color:inherit;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600;
-      transition:all .18s ease;
+    nav button {
+      background: #00eaff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
     }
-    nav button.active{background:linear-gradient(90deg,#00d6ff,#7ee8fa);color:#002a33;border-color:transparent}
-    nav button:hover{transform:translateY(-3px);}
-
-    /* LAYOUT */
-    .wrap{max-width:980px;margin:22px auto;padding:0 18px;}
-    .grid{display:grid;grid-template-columns:1fr 420px;gap:22px}
-    @media(max-width:900px){.grid{grid-template-columns:1fr}}
-
-    /* SECTIONS */
-    .panel{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.03);
-      box-shadow:0 12px 30px rgba(3,19,33,0.5);
-      transition:transform .25s ease,box-shadow .25s ease;
+    nav button:hover {
+      background: #00bcd4;
     }
-    .panel h2{color:#78ecff;margin:0 0 10px;font-size:18px}
-    .muted{color:rgba(255,255,255,0.72);font-size:14px}
-
-    /* HOME CONTENT */
-    .benefit-list{display:flex;flex-direction:column;gap:10px;margin-top:12px}
-    .benefit{
-      display:flex;gap:12px;align-items:flex-start;padding:10px;border-radius:10px;background:rgba(255,255,255,0.02);
-      border:1px solid rgba(255,255,255,0.01);
+    main {
+      padding: 25px;
+      max-width: 800px;
+      margin: auto;
     }
-    .benefit .ico{width:44px;height:44;border-radius:10px;display:grid;place-items:center;background:linear-gradient(90deg,#00d6ff,#7ee8fa);color:#002a33;font-weight:800}
-    .benefit .txt b{display:block}
-
-    /* NOTED */
-    .noted{margin-top:12px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px dashed rgba(255,255,255,0.04)}
-    .noted ul{margin:8px 0 0 18px}
-    .noted li{margin:6px 0;color:#fff9e6}
-
-    /* ORDER SIDE (Fish It) */
-    .order-side .input-row{display:flex;gap:8px;margin-bottom:12px}
-    .input{
-      flex:1;padding:12px;border-radius:10px;border:none;background:rgba(255,255,255,0.03);color:inherit;font-size:15px;
+    section {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
     }
-    .small{font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:8px}
-
-    .pkg-group{display:grid;gap:12px;margin-top:10px}
-    .pkg{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);cursor:pointer;transition:transform .15s ease,box-shadow .15s ease}
-    .pkg:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
-    .pkg .left{display:flex;flex-direction:column;gap:4px}
-    .pkg .title{font-weight:700;color:#bffcff}
-    .pkg .price{color:#ffeaa7;font-weight:800}
-
-    .btn-order{
-      margin-top:12px;padding:10px 14px;border-radius:10px;border:none;background:linear-gradient(90deg,#00d6ff,#7ee8fa);color:#002a33;font-weight:800;cursor:pointer;
-      width:100%;
+    section.active {
+      display: block;
     }
-
-    /* MODAL confirm */
-    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:60}
-    .overlay.open{display:flex}
-    .modal{width:92%;max-width:420px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-    .modal .struk{background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;margin-top:8px}
-
-    /* FOOTER */
-    footer{padding:12px;text-align:center;color:rgba(255,255,255,0.6);font-size:13px;margin-top:26px}
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    h2 {
+      margin-bottom: 15px;
+      color: #00eaff;
+    }
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.02);
+      border-color: #00eaff;
+    }
+    .packages button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #00eaff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .packages button:hover {
+      background: #00bcd4;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      outline: none;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+      opacity: 0.8;
+    }
+    ul { margin-left: 20px; }
   </style>
 </head>
 <body>
   <header>
-    <div class="brand">
-      <div class="title">WILLZ STORE</div>
-      <div class="subtitle">Joki Roblox • Fish It • Aman & Terpercaya</div>
-    </div>
-
+    <h1>WILLZ STORE</h1>
     <nav>
-      <button id="btnHome" class="active">Home</button>
-      <button id="btnFish">Fish It</button>
+      <button onclick="showSection('home')">Home</button>
+      <button onclick="showSection('fishit')">Fish It</button>
     </nav>
   </header>
 
-  <div class="wrap">
-    <div class="grid">
-      <!-- LEFT: HOME (will show when Home active) -->
-      <div id="homePanel" class="panel">
-        <h2>Tentang WILLZ STORE</h2>
-        <div class="muted">Kami menyediakan jasa joki Fish It terpercaya — aman, cepat, dan hemat.</div>
-
-        <h2 style="margin-top:12px">Keuntungan Beli di WILLZ STORE</h2>
-        <div class="benefit-list">
-          <div class="benefit">
-            <div class="ico">🎯</div>
-            <div class="txt"><b>Bebas request pulau</b><span class="muted">Kamu bisa minta pulau tertentu tanpa biaya tambahan.</span></div>
-          </div>
-
-          <div class="benefit">
-            <div class="ico">🎒</div>
-            <div class="txt"><b>Tas anti buka</b><span class="muted">Aman selama proses, item tidak diambil oleh pihak lain.</span></div>
-          </div>
-
-          <div class="benefit">
-            <div class="ico">🐟</div>
-            <div class="txt"><b>Ikan 100% buat kamu</b><span class="muted">Hasil AFK & progress milikmu sepenuhnya.</span></div>
-          </div>
-
-          <div class="benefit">
-            <div class="ico">🔐</div>
-            <div class="txt"><b>Akun aman 100%</b><span class="muted">Kami menjaga kerahasiaan dan keamanan akun.</span></div>
-          </div>
-
-          <div class="benefit">
-            <div class="ico">🚫</div>
-            <div class="txt"><b>Anti ban</b><span class="muted">Metode joki yang minim risiko deteksi.</span></div>
-          </div>
-
-          <div class="benefit">
-            <div class="ico">⚡</div>
-            <div class="txt"><b>Menggunakan auto click</b><span class="muted">Akselerasi kerja joki untuk hasil maksimal.</span></div>
-          </div>
-        </div>
-
-        <h2 style="margin-top:16px">Noted (Catatan Penting)</h2>
-        <div class="noted">
-          <ul>
-            <li>Selama proses AFK, <b>jangan di-attack</b> atau diganggu. Jika terjadi 2x penabrakan/hang, kemungkinan proses dianggap <i>gagal/hangus</i>.</li>
-            <li>Pastikan username dan password yang diberikan <b>benar</b> — kesalahan username dapat menyebabkan order gagal.</li>
-            <li>Untuk paket yang melibatkan batu/enchants atau item langka, konfirmasi terlebih dahulu sebelum bayar.</li>
-            <li>Refund/Komplain dilayani bila ada bukti kuat (sampaikan bukti chat & screenshot transaksi).</li>
-            <li>WILLZ STORE tidak bertanggung jawab atas pelanggaran aturan dari pihak ketiga — gunakan layanan dengan bijak.</li>
-          </ul>
-        </div>
+  <main>
+    <!-- HOME -->
+    <section id="home" class="active">
+      <div class="card">
+        <h2>Tentang Kami</h2>
+        <p>WILLZ STORE adalah jasa joki Roblox Fish It yang aman, terpercaya, dan cepat. Kepercayaan Anda adalah prioritas kami 🚀</p>
       </div>
+      <div class="card">
+        <h2>Keuntungan</h2>
+        <ul>
+          <li>Bebas request pulau</li>
+          <li>Tas anti buka</li>
+          <li>Ikan 100% buat kamu</li>
+          <li>Akun aman 100%</li>
+          <li>Anti ban</li>
+          <li>Menggunakan auto click</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Testimoni</h2>
+        <p>⭐ “Joki cepat, aman, dan terpercaya!”</p>
+        <p>⭐ “Terbaik pokoknya, mantap Bang Willz!”</p>
+      </div>
+    </section>
 
-      <!-- RIGHT: ORDER / FISH IT -->
-      <div id="fishPanel" class="panel" style="display:none">
+    <!-- FISH IT -->
+    <section id="fishit">
+      <div class="card">
         <h2>Order — Fish It</h2>
-        <div class="small">Masukkan nama anda (contoh: Willz) lalu pilih paket.</div>
-
-        <div class="input-row" style="margin-top:10px">
-          <input id="nama" class="input" placeholder="Masukkan nama anda">
-        </div>
-
-        <!-- AFK JOKI -->
-        <div style="margin-top:8px">
-          <h3 style="margin:6px 0 8px 0;color:#9ff6ff">AFK Joki</h3>
-          <div class="pkg-group">
-            <div class="pkg" data-pkg="AFK Joki - 6 Jam" data-price="6K">
-              <div class="left"><div class="title">6 Jam</div><div class="muted">Durasi: 6 jam</div></div>
-              <div class="price">6K</div>
-            </div>
-            <div class="pkg" data-pkg="AFK Joki - 12 Jam" data-price="10K">
-              <div class="left"><div class="title">12 Jam</div><div class="muted">Durasi: 12 jam</div></div>
-              <div class="price">10K</div>
-            </div>
-            <div class="pkg" data-pkg="AFK Joki - 1 Hari" data-price="15K">
-              <div class="left"><div class="title">1 Hari</div><div class="muted">Durasi: 24 jam</div></div>
-              <div class="price">15K</div>
-            </div>
-            <div class="pkg" data-pkg="AFK Joki - 3 Hari" data-price="35K">
-              <div class="left"><div class="title">3 Hari</div><div class="muted">Durasi: 72 jam</div></div>
-              <div class="price">35K</div>
-            </div>
-            <div class="pkg" data-pkg="AFK Joki - 1 Minggu" data-price="65K">
-              <div class="left"><div class="title">1 Minggu</div><div class="muted">Durasi: 7 hari</div></div>
-              <div class="price">65K</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- JOKI KOIN -->
-        <div style="margin-top:12px">
-          <h3 style="margin:6px 0 8px 0;color:#9ff6ff">Jasa Joki Koin</h3>
-          <div class="pkg-group">
-            <div class="pkg" data-pkg="Joki Koin - 1M" data-price="15K">
-              <div class="left"><div class="title">1M</div><div class="muted">1.000.000 Koin</div></div>
-              <div class="price">15K</div>
-            </div>
-            <div class="pkg" data-pkg="Joki Koin - 3M" data-price="25K">
-              <div class="left"><div class="title">3M</div><div class="muted">3.000.000 Koin</div></div>
-              <div class="price">25K</div>
-            </div>
-            <div class="pkg" data-pkg="Joki Koin - 8M" data-price="50K">
-              <div class="left"><div class="title">8M</div><div class="muted">8.000.000 Koin</div></div>
-              <div class="price">50K</div>
-            </div>
-            <div class="pkg" data-pkg="Joki Koin - 10M" data-price="70K">
-              <div class="left"><div class="title">10M</div><div class="muted">10.000.000 Koin</div></div>
-              <div class="price">70K</div>
-            </div>
-            <div class="pkg" data-pkg="Joki Koin - 15M" data-price="90K">
-              <div class="left"><div class="title">15M</div><div class="muted">15.000.000 Koin</div></div>
-              <div class="price">90K</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ROD JOKI -->
-        <div style="margin-top:12px">
-          <h3 style="margin:6px 0 8px 0;color:#9ff6ff">Rod Joki</h3>
-          <div class="pkg-group">
-            <div class="pkg" data-pkg="Rod Joki - Astral Rod" data-price="15K">
-              <div class="left"><div class="title">Astral Rod</div><div class="muted">Upgrade/tukarkan rod</div></div>
-              <div class="price">15K</div>
-            </div>
-            <div class="pkg" data-pkg="Rod Joki - Ares Rod" data-price="35K">
-              <div class="left"><div class="title">Ares Rod</div><div class="muted">Upgrade/tukarkan rod</div></div>
-              <div class="price">35K</div>
-            </div>
-            <div class="pkg" data-pkg="Rod Joki - Angler Rod" data-price="70K">
-              <div class="left"><div class="title">Angler Rod</div><div class="muted">Upgrade/tukarkan rod</div></div>
-              <div class="price">70K</div>
-            </div>
-            <div class="pkg" data-pkg="Rod Joki - GhostFinn Rod" data-price="100K">
-              <div class="left"><div class="title">GhostFinn Rod</div><div class="muted">Upgrade/tukarkan rod</div></div>
-              <div class="price">100K</div>
-            </div>
-          </div>
-        </div>
-
-        </div>
+        <p>Masukkan nama Anda lalu pilih paket:</p>
+        <input type="text" id="nama" placeholder="Contoh: Budi / Andi">
       </div>
-    </div>
-  </div>
 
-  <!-- Modal confirm -->
-  <div id="overlay" class="overlay" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true">
-      <h3 style="margin:0;color:#39d6ff">Konfirmasi Order</h3>
-      <div class="muted" style="font-size:13px;margin-top:6px">Periksa kembali sebelum dikirim ke WhatsApp.</div>
-      <div class="struk" id="struk"></div>
-      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:12px">
-        <button id="cancel" style="padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#eef6fb;cursor:pointer">Batal</button>
-        <button id="send" style="padding:8px 12px;border-radius:8px;border:none;background:linear-gradient(90deg,#00d6ff,#7ee8fa);color:#002a33;font-weight:800;cursor:pointer">Kirim ke WhatsApp</button>
+      <div class="card packages">
+        <h2>AFK Joki</h2>
+        <button onclick="pesan('AFK Joki - 6 Jam','6K')">6 Jam — 6K</button>
+        <button onclick="pesan('AFK Joki - 12 Jam','10K')">12 Jam — 10K</button>
+        <button onclick="pesan('AFK Joki - 1 Hari','15K')">1 Hari — 15K</button>
+        <button onclick="pesan('AFK Joki - 3 Hari','35K')">3 Hari — 35K</button>
+        <button onclick="pesan('AFK Joki - 1 Minggu','65K')">1 Minggu — 65K</button>
       </div>
-    </div>
-  </div>
 
-  <footer>© <b>WILLZ STORE</b> — Jasa Joki Fish It. Gunakan layanan sesuai aturan game.</footer>
-
-<script>
-  // UI: toggle panels
-  const btnHome = document.getElementById('btnHome');
-  const btnFish = document.getElementById('btnFish');
-  const homePanel = document.getElementById('homePanel');
-  const fishPanel = document.getElementById('fishPanel');
-
-  btnHome.addEventListener('click', () => {
-    btnHome.classList.add('active'); btnFish.classList.remove('active');
-    homePanel.style.display = 'block';
-    fishPanel.style.display = 'none';
-    window.scrollTo({top:0,behavior:'smooth'});
-  });
-  btnFish.addEventListener('click', () => {
-    btnFish.classList.add('active'); btnHome.classList.remove('active');
-    homePanel.style.display = 'none';
-    fishPanel.style.display = 'block';
-    window.scrollTo({top:0,behavior:'smooth'});
-  });
-
-  // initial: show home
-  homePanel.style.display = 'block';
-  fishPanel.style.display = 'none';
-
-  // ordering
-  const packages = Array.from(document.querySelectorAll('.pkg'));
-  const usernameInput = document.getElementById('username');
-  const overlay = document.getElementById('overlay');
-  const strukEl = document.getElementById('struk');
-  const sendBtn = document.getElementById('send');
-  const cancelBtn = document.getElementById('cancel');
-  const WA_NUMBER = '6285780688201'; // +62 857-8068-8201
-
-  let selected = null;
-
-  // click package -> open confirm
-  packages.forEach(p=>{
-    p.addEventListener('click', ()=> {
-      const uname = (usernameInput && usernameInput.value || '').trim();
-      if(!uname || uname.length < 2){
-        alert('Masukkan username Roblox terlebih dahulu (min 2 karakter).');
-        // switch to fish panel if needed
-        btnFish.click();
-        usernameInput.focus();
-        return;
-      }
-      selected = { pkg: p.dataset.pkg, price: p.dataset.price, user: uname };
-      showConfirm(selected);
-    });
-  });
-
-  function showConfirm(o){
-    // build struk HTML
-    strukEl.innerHTML = `
-      <div style="margin-top:10px;padding:10px;border-radius:8px;background:rgba(255,255,255,0.02)">
-        <div style="font-weight:800;color:#bffcff">WILLZ STORE — STRUK ORDER</div>
-        <div style="margin-top:8px;font-size:14px;color:rgba(255,255,255,0.9)">
-          <div>Halo Bang Willz 👋</div>
-          <div style="margin-top:6px">Saya mau order:</div>
-          <div style="margin-top:8px"><b>Paket:</b> ${escapeHtml(o.pkg)}</div>
-          <div><b>Harga:</b> ${escapeHtml(o.price)}</div>
-          <div><b>Username:</b> ${escapeHtml(o.user)}</div>
-        </div>
+      <div class="card packages">
+        <h2>Jasa Joki Koin</h2>
+        <button onclick="pesan('Joki Koin - 1M','15K')">1M — 15K</button>
+        <button onclick="pesan('Joki Koin - 3M','25K')">3M — 25K</button>
+        <button onclick="pesan('Joki Koin - 8M','50K')">8M — 50K</button>
+        <button onclick="pesan('Joki Koin - 10M','70K')">10M — 70K</button>
+        <button onclick="pesan('Joki Koin - 15M','90K')">15M — 90K</button>
       </div>
-    `;
-    overlay.classList.add('open');
-    overlay.setAttribute('aria-hidden','false');
-  }
 
-  cancelBtn.addEventListener('click', ()=> {
-    overlay.classList.remove('open');
-    overlay.setAttribute('aria-hidden','true');
-  });
+      <div class="card packages">
+        <h2>Rod Joki</h2>
+        <button onclick="pesan('Rod Joki - Astral Rod','15K')">Astral Rod — 15K</button>
+        <button onclick="pesan('Rod Joki - Ares Rod','35K')">Ares Rod — 35K</button>
+        <button onclick="pesan('Rod Joki - Angler Rod','70K')">Angler Rod — 70K</button>
+        <button onclick="pesan('Rod Joki - GhostFinn Rod','100K')">GhostFinn Rod — 100K</button>
+      </div>
 
-  sendBtn.addEventListener('click', ()=> {
-    if(!selected) return;
-    // prepare message (URL-encoded)
-    const text = `Halo Bang Willz 👋%0A%0ASaya mau order:%0A- Paket: ${encodeURIComponent(selected.pkg)}%0A- Harga: ${encodeURIComponent(selected.price)}%0A- Username: ${encodeURIComponent(selected.user)}%0A%0ATerima kasih`;
-    // open WA
-    window.open(`https://wa.me/${WA_NUMBER}?text=${text}`, '_blank');
-    overlay.classList.remove('open');
-    overlay.setAttribute('aria-hidden','true');
-  });
+      <div class="card">
+        <h2>Noted ⚠️</h2>
+        <p>Selama proses AFK jangan diotak-atik. Jika diotak-atik 2x, pesanan dianggap hangus ❌</p>
+      </div>
+    </section>
+  </main>
 
-  // small helper to escape HTML for modal
-  function escapeHtml(str){
-    return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
-  }
+  <footer>
+    © 2025 WILLZ STORE • Joki Fish It Aman & Terpercaya
+  </footer>
 
-  // accessibility: close modal on overlay click
-  overlay.addEventListener('click', (e)=>{
-    if(e.target === overlay) { overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); }
-  });
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
 
-  // prevent errors from stopping UI
-  window.addEventListener('error', e => { e.preventDefault(); return true; });
-</script>
+    function pesan(paket, harga) {
+      const nama = document.getElementById("nama").value.trim() || "Tanpa Nama";
+      const pesanWA = `Halo Bang Willz 👋%0A` +
+                      `Saya mau order:%0A` +
+                      `Paket: ${paket}%0A` +
+                      `Harga: ${harga}%0A` +
+                      `Nama: ${nama}`;
+      const noWA = "6285780688201";
+      window.open(`https://wa.me/${noWA}?text=${pesanWA}`, "_blank");
+    }
+  </script>
 </body>
 </html>
